@@ -24,7 +24,7 @@ export class NotificationsService {
       from: this.configService.get('SMTP_USER'),
       to: email,
       subject: 'Sleeper Notification',
-      text, 
+      text,
     });
   }
 }

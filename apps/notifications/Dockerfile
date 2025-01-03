@@ -8,11 +8,12 @@ COPY tsconfig.json tsconfig.json
 COPY nest-cli.json nest-cli.json
 
 RUN npm install -g npm
+RUN npm install -g @nestjs/cli
 
 COPY apps/notifications apps/notifications
 COPY libs libs
 
-RUN npm install -r
+RUN npm install
 
 RUN npm run build notifications
 
