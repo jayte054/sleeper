@@ -7,7 +7,7 @@ import {
 import * as bcrypt from 'bcryptjs';
 import { CreateUserDto, GetUserDto } from '../dto/createUserDto.dto';
 import { UsersRepository } from './users.repository';
-import { UsersDocument } from '../models/user.schema';
+import { UsersDocument } from '@app/common';
 
 @Injectable()
 export class UsersService {
@@ -47,9 +47,7 @@ export class UsersService {
 
   getUser = async (getUserDto: GetUserDto) => {
     try {
-      console.log(getUserDto);
       const user = this.userRepository.findOne({ _id: getUserDto._id });
-      console.log(user);
       return user;
     } catch (error) {
       console.log(error);

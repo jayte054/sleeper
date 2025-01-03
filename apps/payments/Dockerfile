@@ -10,8 +10,10 @@ RUN npm install -g npm
 
 RUN npm install
 
-COPY apps/reservations apps/reservations
+COPY apps/payments apps/payments
 COPY libs libs
+
+RUN cd apps/payments && npm install
 
 RUN npm run build
 
@@ -31,4 +33,4 @@ RUN npm install --prod
 
 COPY --from=development /usr/src/app/dist ./dist
 
-CMD ["node", "dist/apps/reservations/main"]
+CMD ["node", "dist/apps/payments/main"]

@@ -2,7 +2,6 @@ import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { UsersService } from '../users/users.service';
-import { Request } from 'express';
 import { Injectable } from '@nestjs/common';
 import { TokenPayload } from '../interfaces/users.interfaces';
 
@@ -14,14 +13,15 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   ) {
     super({
       jwtFromRequest: ExtractJwt.fromExtractors([
-        (request: Request) => request?.cookies?.Authentication,
+        // use of the any type is because the request might be either from express or an grpc call
+        (request: any) =>
+          request?.cookies?.Authentication || request?.Authentication,
       ]),
       secretOrKey: configService.get('JWT_SECRET'),
     });
   }
 
   validate = async ({ userId }: TokenPayload) => {
-    console.log('24', userId);
     return this.usersService.getUser({ _id: userId });
   };
 }

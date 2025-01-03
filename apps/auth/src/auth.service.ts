@@ -2,7 +2,7 @@ import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { Response } from 'express';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
-import { UsersDocument } from './models/user.schema';
+import { UsersDocument } from '@app/common';
 import { TokenPayload } from './interfaces/users.interfaces';
 
 @Injectable()
