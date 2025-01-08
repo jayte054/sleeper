@@ -16,25 +16,25 @@ spec:
       - name: payments
         image: us-east4-docker.pkg.dev/sleeper-446205/payments/production
         ports:
-        - containerPort: 3001
+        - containerPort: 3003
         env:
-          - name: GOOGLE_OAUTH_CLIENT_ID
+          - name: NOTIFICATIONS_HOST
             valueFrom:
               secretKeyRef:
-                name: google-client-id
-                key: GOOGLE_OAUTH_CLIENT_ID
-          - name: GOOGLE_OAUTH_CLIENT_SECRET
+                name: notifications-host
+                key: NOTIFICATIONS_HOST
+          - name: NOTIFICATIONS_PORT
             valueFrom:
               secretKeyRef:
-                name: google-client-secret
-                key: GOOGLE_OAUTH_CLIENT_SECRET
-          - name: GOOGLE_OAUTH_REFRESH_TOKEN
+                name: notifications-port
+                key: NOTIFICATIONS_PORT
+          - name: STRIPE_SECRET_KEY
             valueFrom:
               secretKeyRef:
-                name: google-refresh-token
-                key: GOOGLE_OAUTH_REFRESH_TOKEN
-          - name: SMTP_USER
+                name: stripe-key
+                key: STRIPE_SECRET_KEY
+          - name: PORT
             valueFrom:
               secretKeyRef:
-                name: google-smtp-user
-                key: SMTP_USER
+                name: payment-port
+                key: PORT
