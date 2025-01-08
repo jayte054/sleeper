@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: auth
-        image: us-east4-docker.pkg.dev/sleeper-446205/auth
+        image: us-east4-docker.pkg.dev/sleeper-446205/auth/production
         ports:
         - containerPort: 3001
         env:

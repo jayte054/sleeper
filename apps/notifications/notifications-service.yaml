@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: service
+metadata:
+  name: notifications
+spec:
+  selector:
+    app: notifications
+  ports:
+  - port: 3004
+    targetPort: 3004
+  type: LoadBalancer
