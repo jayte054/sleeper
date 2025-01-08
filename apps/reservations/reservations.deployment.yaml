@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reservations
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: reservations
+  template:
+    metadata:
+      labels:
+        app: reservations
+    spec:
+      containers:
+      - name: reservations
+        image: us-east4-docker.pkg.dev/sleeper-446205/reservations/production
+        ports:
+        - containerPort: 3000
+        env:
+          - name: MONGODB_URI
+            valueFrom:
+              secretKeyRef:
+                name: db-secrets
+                key: MONGODB_URI
+          - name: PORT
+            valueFrom:
+              secretKeyRef:
+                name: reservations-port
+                key: PORT
+          - name: PAYMENTS_HOST
+            valueFrom:
+              secretKeyRef:
+                name: payments-host
+                key: PAYMENTS_HOST
+          - name: PAYMENTS_PORT
+            valueFrom:
+              secretKeyRef:
+                name: payments-port
+                key: PAYMENTS_PORT
+          - name: AUTH_PORT
+            valueFrom:
+              secretKeyRef:
+                name: auth-port
+                key: AUTH_PORT
+          - name: AUTH_HOST
+            valueFrom:
+              secretKeyRef:
+                name: auth-host
+                key: AUTH_HOST
